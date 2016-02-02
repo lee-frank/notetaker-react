@@ -8,6 +8,7 @@ import Rebase from 're-base';
 const base = Rebase.createClass('https://github-note-taker.firebaseio.com/')
 
 class Profile extends React.Component {
+  //replace getInitialState
   constructor(props){
     super(props);
     this.state = {
@@ -27,10 +28,11 @@ class Profile extends React.Component {
     base.removeBinding(this.ref);
   }
   init(username){
+    //bind to username endpoint in firebase
     this.ref = base.bindToState(username, {
       context: this,
       asArray: true,
-      state: 'notes'
+      state: 'notes' //update notes property on state object
     });
 
     getGithubInfo(username)
@@ -42,6 +44,7 @@ class Profile extends React.Component {
       }.bind(this))
   }
   handleAddNote(newNote){
+    //replace this.props.params.username with 'data:'
     base.post(this.props.params.username, {
       data: this.state.notes.concat([newNote])
     })
