@@ -13,7 +13,7 @@ const Main = ({children, history}) => {
         {children}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

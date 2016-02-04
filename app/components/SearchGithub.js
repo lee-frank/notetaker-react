@@ -2,39 +2,36 @@ import React from 'react';
 import Router from 'react-router';
 
 class SearchGithub extends React.Component {
-  //get value of input field
-  getRef(ref){ 
+  // get value of input field
+  getRef(ref) {
     this.usernameRef = ref;
   }
-  handleSubmit(){
+  handleSubmit() {
     const username = this.usernameRef.value;
     this.usernameRef.value = '';
 
-    //react history module property "pushState"
-    //when someone clicks handleSubmit, grab username, route to profile username
-    this.props.history.pushState(null, "/profile/" + username)
+    // react history module property "pushState"
+    // when someone clicks handleSubmit, grab username, route to profile username
+    this.props.history.pushState(null, '/profile/' + username);
   }
-  render(){
+  render() {
     return (
       <div className="col-sm-12">
         <form onSubmit={() => this.handleSubmit()}>
           <div className="form-group col-sm-7">
-            <input type="text" className="form-control" ref={(ref) => this.getRef(ref)} />
+            <input type="text" className="form-control" ref={ref => this.getRef(ref)} />
           </div>
           <div className="form-group col-sm-5">
             <button type="submit" className="btn btn-block btn-primary">Search Github</button>
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
 
 SearchGithub.PropTypes = {
   history: React.PropTypes.object.isRequired
-}
+};
 
 export default SearchGithub;
-
-
-

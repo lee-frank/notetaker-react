@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const UserProfile = ({bio}) => {
   return (
@@ -14,12 +14,12 @@ const UserProfile = ({bio}) => {
       {bio.following && <li className="list-group-item">Public Repos: {bio.public_repos}</li>}
       {bio.blog && <li className="list-group-item">Blog: <a href={bio.blog}> {bio.blog}</a></li>}
     </div>
-  )
-}
+  );
+};
 
 UserProfile.propTypes = {
   username: React.PropTypes.string.isRequired,
   bio: React.PropTypes.object.isRequired
-}
+};
 
 export default UserProfile;

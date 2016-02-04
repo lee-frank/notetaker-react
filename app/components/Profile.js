@@ -1,49 +1,50 @@
-import React from 'react'
+import React from 'react';
 import Repos from './Github/Repos';
 import UserProfile from './Github/UserProfile';
 import Notes from './Notes/Notes';
 import getGithubInfo from '../utils/helpers';
 import Rebase from 're-base';
 
-const base = Rebase.createClass('https://github-note-taker.firebaseio.com/')
+const base = Rebase.createClass('https://github-note-taker.firebaseio.com/');
 
 class Profile extends React.Component {
-  //replace getInitialState
-  constructor(props){
+  // replace getInitialState
+  constructor(props) {
     super(props);
     this.state = {
       notes: [],
       bio: {},
       repos: []
-    }
+    };
   }
-  componentDidMount(){
-    this.init(this.props.params.username)
+  componentDidMount() {
+    this.init(this.props.params.username);
   }
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     base.removeBinding(this.ref);
     this.init(nextProps.params.username);
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     base.removeBinding(this.ref);
   }
-  init(username){
-    //bind to username endpoint in firebase
+  init(username) {
+    // bind to username endpoint in firebase
     this.ref = base.bindToState(username, {
       context: this,
       asArray: true,
-      state: 'notes' //update notes property on state object
+      // update notes property on state object
+      state: 'notes'
     });
 
     getGithubInfo(username)
-      .then(function(data){
+      .then(function(data) {
         this.setState({
           bio: data.bio,
           repos: data.repos
-        })
-      }.bind(this))
+        });
+      }.bind(this));
   }
-  handleAddNote(newNote){
+  handleAddNote(newNote) {
     //replace this.props.params.username with 'data:'
     base.post(this.props.params.username, {
       data: this.state.notes.concat([newNote])
